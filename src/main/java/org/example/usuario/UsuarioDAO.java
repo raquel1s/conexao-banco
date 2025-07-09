@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UsuarioDAO {
 
@@ -25,8 +26,9 @@ public class UsuarioDAO {
         }
     }
 
-    public static void listar() {
-        String sql = "SELECT * FROM usuarios";
+    public static ArrayList<Usuario> listar() {
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT nome, email FROM usuarios";
 
         try(Connection conn = Conexao.conectar();
         PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -37,14 +39,15 @@ public class UsuarioDAO {
                 String nome = rs.getString("nome");
                 String email = rs.getString("email");
 
-                System.out.println("\nNome: " + nome +
-                        "\nEmail: " + email + "\n");
+                Usuario usuario = new Usuario(nome, email);
+                usuarios.add(usuario);
             }
 
         }catch(SQLException e) {
             e.printStackTrace();
         }
 
+        return usuarios;
     }
 
     public static void atualizar(String nome, String novoEmail) {
@@ -72,7 +75,7 @@ public class UsuarioDAO {
             stmt.setString(1, nome);
             stmt.executeUpdate();
 
-            System.out.println("Usuário deletado com sucesso!");
+            System.out.println("Usuário removido com sucesso!\n");
         } catch (SQLException e) {
             e.printStackTrace();
         }

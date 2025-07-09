@@ -23,4 +23,11 @@ public class Livro {
     public int getAno() {
         return ano;
     }
+
+    @Override
+    public String toString() {
+        return "\nTítulo: " + titulo +
+                "\nAutor: " + autor +
+                "\nAno de publicação: " + ano + "\n";
+    }
 }

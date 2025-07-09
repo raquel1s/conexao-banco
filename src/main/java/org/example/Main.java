@@ -14,6 +14,7 @@ import org.example.usuario.Usuario;
 import org.example.usuario.UsuarioDAO;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -43,26 +44,60 @@ public class Main {
         }while(opcao != 5);
     }
 
+    private static void menuClasses(){
+        System.out.println("1 - Usuário");
+        System.out.println("2 - Aluno");
+        System.out.println("3 - Produto");
+        System.out.println("4 - Pedido");
+        System.out.println("5 - Livro");
+        System.out.println("6 - Funcionário");
+        System.out.println("7 - Voltar");
+        System.out.print("Escolha uma opção_ ");
+    }
+
     private static void listar() {
         do{
             System.out.println("=== LISTAR ===");
-            System.out.println("1 - Usuário");
-            System.out.println("2 - Aluno");
-            System.out.println("3 - Produto");
-            System.out.println("4 - Pedido");
-            System.out.println("5 - Livro");
-            System.out.println("6 - Funcionário");
-            System.out.println("7 - Voltar");
-            System.out.print("Escolha uma opção_ ");
+            menuClasses();
             opcao = sc.nextInt();
 
             switch (opcao){
-                case 1 -> UsuarioDAO.listar();
-                case 2 -> AlunoDAO.listar();
-                case 3 -> ProdutoDAO.listar();
-                case 4 -> PedidoDAO.listar();
-                case 5 -> LivroDAO.listar();
-                case 6 -> FuncionarioDAO.listar();
+                case 1 -> {
+                    ArrayList<Usuario> usuario = UsuarioDAO.listar();
+                    for(Usuario u : usuario){
+                        System.out.println(u);
+                    }
+                }
+                case 2 -> {
+                    ArrayList<Aluno> alunos = AlunoDAO.listar();
+                    for(Aluno a : alunos){
+                        System.out.println(a);
+                    }
+                }
+                case 3 -> {
+                    ArrayList<Produto> produtos = ProdutoDAO.listar();
+                    for(Produto p : produtos){
+                        System.out.println(p);
+                    }
+                }
+                case 4 -> {
+                    ArrayList<Pedido> pedidos = PedidoDAO.listar();
+                    for(Pedido p : pedidos){
+                        System.out.println(p);
+                    }
+                }
+                case 5 -> {
+                    ArrayList<Livro> livros = LivroDAO.listar();
+                    for(Livro l : livros){
+                        System.out.println(l);
+                    }
+                }
+                case 6 -> {
+                    ArrayList<Funcionario> funcionarios = FuncionarioDAO.listar();
+                    for(Funcionario f : funcionarios){
+                        System.out.println(f);
+                    }
+                }
                 case 7 -> System.out.println("Voltando ao menu principal...");
             }
         }while(opcao != 7);
@@ -71,18 +106,12 @@ public class Main {
     private static void atualizar() {
         do{
             System.out.println("=== ATUALIZAR ===");
-            System.out.println("1 - Usuário");
-            System.out.println("2 - Aluno");
-            System.out.println("3 - Produto");
-            System.out.println("4 - Pedido");
-            System.out.println("5 - Livro");
-            System.out.println("6 - Funcionário");
-            System.out.println("7 - Voltar");
-            System.out.print("Escolha uma opção_ ");
+            menuClasses();
             opcao = sc.nextInt();
 
             switch (opcao){
                 case 1 -> {
+                    sc.nextLine();
                     System.out.println("Digite o nome do usuário: ");
                     String nome = sc.next();
 
@@ -92,6 +121,7 @@ public class Main {
                     UsuarioDAO.atualizar(nome, novoEmail);
                 }
                 case 2 -> {
+                    sc.nextLine();
                     System.out.println("Digite a matrícula do aluno: ");
                     String matricula = sc.nextLine();
 
@@ -101,16 +131,43 @@ public class Main {
                     AlunoDAO.atualizar(matricula, novoCurso);
                 }
                 case 3 -> {
+                    sc.nextLine();
+                    System.out.println("Digite o nome do produto: ");
+                    String nome = sc.nextLine();
 
+                    System.out.println("Digite o novo preço do produto: ");
+                    Double novoPreco = sc.nextDouble();
+
+                    ProdutoDAO.atualizar(nome, novoPreco);
                 }
                 case 4 -> {
+                    sc.nextLine();
+                    System.out.println("Digite o id do pedido: ");
+                    int id = sc.nextInt();
 
+                    System.out.println("Digite o novo total do pedido: ");
+                    double novoTotal = sc.nextDouble();
+
+                    PedidoDAO.atualizar(id, novoTotal);
                 }
                 case 5 -> {
+                    System.out.println("Digite o título do livro: ");
+                    String titulo = sc.nextLine();
 
+                    System.out.println("Digite o novo autor do livro: ");
+                    String novoAutor = sc.nextLine();
+
+                    LivroDAO.atualizar(titulo, novoAutor);
                 }
                 case 6 -> {
+                    sc.nextLine();
+                    System.out.println("Digite o nome do funcionário: ");
+                    String nome = sc.nextLine();
 
+                    System.out.println("Digite o novo salário do funcionário: ");
+                    double novoSalario = sc.nextDouble();
+
+                    FuncionarioDAO.atualizar(nome, novoSalario);
                 }
                 case 7 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opção Inválida.");
@@ -122,52 +179,50 @@ public class Main {
     private static void excluir() {
         do{
             System.out.println("=== EXCLUIR ===");
-            System.out.println("1 - Usuário");
-            System.out.println("2 - Aluno");
-            System.out.println("3 - Produto");
-            System.out.println("4 - Pedido");
-            System.out.println("5 - Livro");
-            System.out.println("6 - Funcionário");
-            System.out.println("7 - Voltar");
-            System.out.print("Escolha uma opção_ ");
+            menuClasses();
             opcao = sc.nextInt();
 
             switch (opcao){
                 case 1 -> {
+                    sc.nextLine();
                     System.out.println("Digite o nome do usuario que deseja excluir: ");
-                    String nomeUsuario = sc.next();
+                    String nomeUsuario = sc.nextLine();
 
                     UsuarioDAO.excluir(nomeUsuario);
                 }
                 case 2 -> {
+                    sc.nextLine();
                     System.out.println("Digite a matrícula do aluno que deseja excluir: ");
-                    String matricula = sc.next();
+                    String matricula = sc.nextLine();
 
-                    //AlunoDAO.excluir(matricula);
+                    AlunoDAO.excluir(matricula);
                 }
                 case 3 -> {
+                    sc.nextLine();
                     System.out.println("Digite o nome do produto que deseja excluir: ");
-                    String nomeProduto = sc.next();
+                    String nomeProduto = sc.nextLine();
 
-                    //ProdutoDAO.excluir(nomeProduto);
+                    ProdutoDAO.excluir(nomeProduto);
                 }
                 case 4 -> {
                     System.out.println("Digite o id do pedido que deseja excluir: ");
                     int id = sc.nextInt();
 
-                    //PedidoDAO.excluir(id);
+                    PedidoDAO.excluir(id);
                 }
                 case 5 -> {
+                    sc.nextLine();
                     System.out.println("Digite o título do livro que deseja excluir: ");
-                    String titulo = sc.next();
+                    String titulo = sc.nextLine();
 
-                    //LivroDAO.excluir(titulo);
+                    LivroDAO.excluir(titulo);
                 }
                 case 6 -> {
+                    sc.nextLine();
                     System.out.println("Digite o nome do funcionário que deseja excluir: ");
-                    String nomeFuncionario = sc.next();
+                    String nomeFuncionario = sc.nextLine();
 
-                    //FuncionarioDAO.excluir(nomeFuncionario);
+                    FuncionarioDAO.excluir(nomeFuncionario);
                 }
                 case 7 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opção Inválida.");
@@ -178,18 +233,12 @@ public class Main {
     public static void cadastrar() {
         do{
             System.out.println("=== CADASTRAR ===");
-            System.out.println("1 - Usuário");
-            System.out.println("2 - Aluno");
-            System.out.println("3 - Produto");
-            System.out.println("4 - Pedido");
-            System.out.println("5 - Livro");
-            System.out.println("6 - Funcionário");
-            System.out.println("7 - Voltar");
-            System.out.print("Escolha uma opção_ ");
+            menuClasses();
             opcao = sc.nextInt();
 
             switch (opcao){
                 case 1 -> {
+                    sc.nextLine();
                     System.out.println("Digite o nome: ");
                     String nome = sc.nextLine();
 

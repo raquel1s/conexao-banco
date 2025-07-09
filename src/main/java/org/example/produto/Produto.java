@@ -23,4 +23,11 @@ public class Produto {
     public int getQuantidade() {
         return quantidade;
     }
+
+    @Override
+    public String toString() {
+        return "\nNome do produto: " + nome +
+                "\nPreço: " + preco +
+                "\nQuantidade: " + quantidade + "\n";
+    }
 }

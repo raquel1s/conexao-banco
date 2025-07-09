@@ -23,4 +23,11 @@ public class Aluno {
     public String getCurso() {
         return curso;
     }
+
+    @Override
+    public String toString() {
+        return "\nNome: " + nome +
+                "\nMatrícula: " + matricula +
+                "\nCurso: " + curso + "\n";
+    }
 }

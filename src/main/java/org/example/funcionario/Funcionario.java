@@ -23,4 +23,11 @@ public class Funcionario {
     public double getSalario() {
         return salario;
     }
+
+    @Override
+    public String toString() {
+        return "\nNome do funcionário: " + nome +
+                "\nCargo: " + cargo +
+                "\nSalário: " + salario + "\n";
+    }
 }
