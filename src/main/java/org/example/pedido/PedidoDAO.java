@@ -38,11 +38,13 @@ public class PedidoDAO {
 
 
             while(rs.next()){
+                int id = rs.getInt("id");
                 String cliente = rs.getString("cliente");
                 LocalDate data = rs.getDate("data_pedido").toLocalDate();
                 double total = rs.getDouble("total");
 
-                System.out.println("\nCliente: " + cliente +
+                System.out.println("Id: " + id +
+                        "\nCliente: " + cliente +
                         "\nData do pedido: " + data.format(formatar) +
                         "\nTotal do pedido: " + total + "\n");
             }

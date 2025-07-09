@@ -49,4 +49,8 @@ public class AlunoDAO {
             e.printStackTrace();
         }
     }
+
+    public static void atualizar(String matricula, String novocurso) {
+
+    }
 }

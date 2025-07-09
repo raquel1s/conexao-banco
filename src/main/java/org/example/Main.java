@@ -80,6 +80,28 @@ public class Main {
             System.out.println("7 - Voltar");
             System.out.print("Escolha uma opção_ ");
             opcao = sc.nextInt();
+
+            switch (opcao){
+                case 1 -> {
+                    System.out.println("Digite o nome do usuário: ");
+                    String nome = sc.next();
+
+                    System.out.println("Digite o novo email do usuario: ");
+                    String novoEmail = sc.next();
+
+                    UsuarioDAO.atualizar(nome, novoEmail);
+                }
+                case 2 -> {
+                    System.out.println("Digite a matrícula do aluno: ");
+                    String matricula = sc.nextLine();
+
+                    System.out.println("Digite o novo curso do aluno: ");
+                    String novoCurso = sc.nextLine();
+
+                    AlunoDAO.atualizar(matricula, novoCurso);
+                }
+            }
+
         }while(opcao != 7);
     }
 
@@ -95,6 +117,45 @@ public class Main {
             System.out.println("7 - Voltar");
             System.out.print("Escolha uma opção_ ");
             opcao = sc.nextInt();
+
+            switch (opcao){
+                case 1 -> {
+                    System.out.println("Digite o nome do usuario que deseja excluir: ");
+                    String nomeUsuario = sc.next();
+
+                    UsuarioDAO.excluir(nomeUsuario);
+                }
+                case 2 -> {
+                    System.out.println("Digite a matrícula do aluno que deseja excluir: ");
+                    String matricula = sc.next();
+
+                    //AlunoDAO.excluir(matricula);
+                }
+                case 3 -> {
+                    System.out.println("Digite o nome do produto que deseja excluir: ");
+                    String nomeProduto = sc.next();
+
+                    //ProdutoDAO.excluir(nomeProduto);
+                }
+                case 4 -> {
+                    System.out.println("Digite o id do pedido que deseja excluir: ");
+                    int id = sc.nextInt();
+
+                    //PedidoDAO.excluir(id);
+                }
+                case 5 -> {
+                    System.out.println("Digite o título do livro que deseja excluir: ");
+                    String titulo = sc.next();
+
+                    //LivroDAO.excluir(titulo);
+                }
+                case 6 -> {
+                    System.out.println("Digite o nome do funcionário que deseja excluir: ");
+                    String nomeFuncionario = sc.next();
+
+                    //FuncionarioDAO.excluir(nomeFuncionario);
+                }
+            }
         }while(opcao != 7);
     }
 
