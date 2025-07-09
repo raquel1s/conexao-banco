@@ -100,6 +100,20 @@ public class Main {
 
                     AlunoDAO.atualizar(matricula, novoCurso);
                 }
+                case 3 -> {
+
+                }
+                case 4 -> {
+
+                }
+                case 5 -> {
+
+                }
+                case 6 -> {
+
+                }
+                case 7 -> System.out.println("Voltando ao menu principal...");
+                default -> System.out.println("Opção Inválida.");
             }
 
         }while(opcao != 7);
@@ -155,6 +169,8 @@ public class Main {
 
                     //FuncionarioDAO.excluir(nomeFuncionario);
                 }
+                case 7 -> System.out.println("Voltando ao menu principal...");
+                default -> System.out.println("Opção Inválida.");
             }
         }while(opcao != 7);
     }
