@@ -1,4 +1,4 @@
-package org.example;
+package org.example.pedido;
 
 import java.time.LocalDate;
 

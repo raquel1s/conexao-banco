@@ -1,5 +1,18 @@
 package org.example;
 
+import org.example.aluno.Aluno;
+import org.example.aluno.AlunoDAO;
+import org.example.funcionario.Funcionario;
+import org.example.funcionario.FuncionarioDAO;
+import org.example.livro.Livro;
+import org.example.livro.LivroDAO;
+import org.example.pedido.Pedido;
+import org.example.pedido.PedidoDAO;
+import org.example.produto.Produto;
+import org.example.produto.ProdutoDAO;
+import org.example.usuario.Usuario;
+import org.example.usuario.UsuarioDAO;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -33,6 +46,8 @@ public class Main {
                     UsuarioDAO.inserir(usuario);
                 }
                 case 2 -> {
+                    sc.nextLine();
+
                     System.out.println("Digite o nome: ");
                     String nome = sc.nextLine();
 
@@ -46,6 +61,23 @@ public class Main {
                     AlunoDAO.inserir(aluno);
                 }
                 case 3 -> {
+                    sc.nextLine();
+
+                    System.out.println("Digite o nome do produto: ");
+                    String nome = sc.nextLine();
+
+                    System.out.println("Digite o preço do produto: ");
+                    double preco = sc.nextDouble();
+
+                    System.out.println("Digite o quantidade do produto: ");
+                    int quantidade = sc.nextInt();
+
+                    Produto produto = new Produto(nome, preco, quantidade);
+                    ProdutoDAO.inserir(produto);
+                }
+                case 4 -> {
+                    sc.nextLine();
+
                     System.out.println("Digite o nome do cliente: ");
                     String cliente = sc.nextLine();
 
@@ -57,15 +89,37 @@ public class Main {
                     Pedido pedido = new Pedido(cliente, dataPedido, total);
                     PedidoDAO.inserir(pedido);
                 }
-                case 4 -> {
-
-                }
                 case 5 -> {
+                    sc.nextLine();
 
+                    System.out.println("Digite o título do livro: ");
+                    String titulo = sc.nextLine();
+
+                    System.out.println("Digite o nome do autor do livro: ");
+                    String autor = sc.nextLine();
+
+                    System.out.println("Digite o ano do livro: ");
+                    int ano = sc.nextInt();
+
+                    Livro livro = new Livro(titulo, autor, ano);
+                    LivroDAO.inserir(livro);
                 }
                 case 6 -> {
+                    sc.nextLine();
 
+                    System.out.println("Digite o nome do funcionário: ");
+                    String nome = sc.nextLine();
+
+                    System.out.println("Digite o cargo do funcionário: ");
+                    String cargo = sc.nextLine();
+
+                    System.out.println("Digite o salário do funcionário: ");
+                    double salario = sc.nextDouble();
+
+                    Funcionario funcionario = new Funcionario(nome, cargo, salario);
+                    FuncionarioDAO.inserir(funcionario);
                 }
+                case 7 -> System.out.println("Saindo...");
                 default -> System.out.println("Opcão Inválida.");
             }
 

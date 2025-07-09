@@ -1,4 +1,6 @@
-package org.example;
+package org.example.usuario;
+
+import org.example.conexao.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +18,7 @@ public class UsuarioDAO {
             stmt.setString(2, usuario.getEmail());
             stmt.executeUpdate();
 
-            System.out.println("Usuário inserido com sucesso!");
+            System.out.println("Usuário inserido com sucesso!\n");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,4 +1,6 @@
-package org.example;
+package org.example.aluno;
+
+import org.example.conexao.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,9 @@ public class AlunoDAO {
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getMatricula());
             stmt.setString(3, aluno.getCurso());
+            stmt.executeUpdate();
+
+            System.out.println("Aluno inserido com sucesso!\n");
 
         } catch (SQLException e) {
             e.printStackTrace();

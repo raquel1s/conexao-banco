@@ -1,4 +1,4 @@
-package org.example;
+package org.example.aluno;
 
 public class Aluno {
 
