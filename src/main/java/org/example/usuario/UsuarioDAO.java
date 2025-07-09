@@ -4,6 +4,7 @@ import org.example.conexao.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UsuarioDAO {
@@ -24,4 +25,25 @@ public class UsuarioDAO {
         }
     }
 
+    public static void listar() {
+        String sql = "SELECT * FROM usuarios";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while(rs.next()) {
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+
+                System.out.println("\nNome: " + nome +
+                        "\nEmail: " + email + "\n");
+            }
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

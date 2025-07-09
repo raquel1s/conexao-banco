@@ -17,21 +17,98 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
+
+    private static final Scanner sc = new Scanner(System.in);
+    private static int opcao = 0;
+
     public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-        int opcao = 0;
-
         do{
+            System.out.println("=== OPERAÇÕES ===");
+            System.out.println("1. CADASTRAR");
+            System.out.println("2. ATUALIZAR");
+            System.out.println("3. EXCLUIR");
+            System.out.println("4. LISTAR");
+            System.out.println("5. SAIR");
+            System.out.print("Escolha uma opção_ ");
+            opcao = sc.nextInt();
 
-            System.out.println("=== SISTEMA DE CADASTRO ===");
+            switch (opcao){
+                case 1 -> cadastrar();
+                case 2 -> atualizar();
+                case 3 -> excluir();
+                case 4 -> listar();
+                case 5 -> System.out.println("Saindo...");
+                default -> System.out.println("Opção Inválida.");
+            }
+        }while(opcao != 5);
+    }
+
+    private static void listar() {
+        do{
+            System.out.println("=== LISTAR ===");
             System.out.println("1 - Usuário");
             System.out.println("2 - Aluno");
             System.out.println("3 - Produto");
             System.out.println("4 - Pedido");
             System.out.println("5 - Livro");
             System.out.println("6 - Funcionário");
-            System.out.println("7 - Sair");
+            System.out.println("7 - Voltar");
+            System.out.print("Escolha uma opção_ ");
+            opcao = sc.nextInt();
+
+            switch (opcao){
+                case 1 -> UsuarioDAO.listar();
+                case 2 -> AlunoDAO.listar();
+                case 3 -> ProdutoDAO.listar();
+                case 4 -> PedidoDAO.listar();
+                case 5 -> LivroDAO.listar();
+                case 6 -> FuncionarioDAO.listar();
+                case 7 -> System.out.println("Voltando ao menu principal...");
+            }
+        }while(opcao != 7);
+    }
+
+    private static void atualizar() {
+        do{
+            System.out.println("=== ATUALIZAR ===");
+            System.out.println("1 - Usuário");
+            System.out.println("2 - Aluno");
+            System.out.println("3 - Produto");
+            System.out.println("4 - Pedido");
+            System.out.println("5 - Livro");
+            System.out.println("6 - Funcionário");
+            System.out.println("7 - Voltar");
+            System.out.print("Escolha uma opção_ ");
+            opcao = sc.nextInt();
+        }while(opcao != 7);
+    }
+
+    private static void excluir() {
+        do{
+            System.out.println("=== EXCLUIR ===");
+            System.out.println("1 - Usuário");
+            System.out.println("2 - Aluno");
+            System.out.println("3 - Produto");
+            System.out.println("4 - Pedido");
+            System.out.println("5 - Livro");
+            System.out.println("6 - Funcionário");
+            System.out.println("7 - Voltar");
+            System.out.print("Escolha uma opção_ ");
+            opcao = sc.nextInt();
+        }while(opcao != 7);
+    }
+
+    public static void cadastrar() {
+        do{
+            System.out.println("=== CADASTRAR ===");
+            System.out.println("1 - Usuário");
+            System.out.println("2 - Aluno");
+            System.out.println("3 - Produto");
+            System.out.println("4 - Pedido");
+            System.out.println("5 - Livro");
+            System.out.println("6 - Funcionário");
+            System.out.println("7 - Voltar");
+            System.out.print("Escolha uma opção_ ");
             opcao = sc.nextInt();
 
             switch (opcao){
@@ -119,11 +196,10 @@ public class Main {
                     Funcionario funcionario = new Funcionario(nome, cargo, salario);
                     FuncionarioDAO.inserir(funcionario);
                 }
-                case 7 -> System.out.println("Saindo...");
+                case 7 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opcão Inválida.");
             }
 
         }while(opcao != 7);
-
     }
 }

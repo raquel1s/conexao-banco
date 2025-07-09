@@ -25,4 +25,8 @@ public class FuncionarioDAO {
             e.printStackTrace();
         }
     }
+
+    public static void listar() {
+
+    }
 }

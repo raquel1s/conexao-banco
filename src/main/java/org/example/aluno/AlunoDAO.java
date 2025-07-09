@@ -4,6 +4,7 @@ import org.example.conexao.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AlunoDAO {
@@ -22,6 +23,29 @@ public class AlunoDAO {
             System.out.println("Aluno inserido com sucesso!\n");
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void listar() {
+        String sql = "SELECT * FROM alunos";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                String nome = rs.getString("nome");
+                String matricula = rs.getString("matricula");
+                String curso = rs.getString("curso");
+
+                System.out.println("\nNome: " + nome +
+                        "\nMatrícula: " + matricula +
+                        "\nCurso: " + curso + "\n");
+            }
+
+        }catch(SQLException e) {
             e.printStackTrace();
         }
     }

@@ -2,10 +2,11 @@ package org.example.pedido;
 
 import org.example.conexao.Conexao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class PedidoDAO {
 
@@ -27,4 +28,27 @@ public class PedidoDAO {
         }
     }
 
+    public static void listar() {
+        DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String sql = "SELECT * FROM pedidos";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+            ResultSet rs = stmt.executeQuery();
+
+
+            while(rs.next()){
+                String cliente = rs.getString("cliente");
+                LocalDate data = rs.getDate("data_pedido").toLocalDate();
+                double total = rs.getDouble("total");
+
+                System.out.println("\nCliente: " + cliente +
+                        "\nData do pedido: " + data.format(formatar) +
+                        "\nTotal do pedido: " + total + "\n");
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

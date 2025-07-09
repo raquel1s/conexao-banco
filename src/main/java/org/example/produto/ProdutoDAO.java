@@ -2,8 +2,10 @@ package org.example.produto;
 
 import org.example.conexao.Conexao;
 
+import java.lang.invoke.StringConcatFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProdutoDAO {
@@ -24,5 +26,29 @@ public class ProdutoDAO {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public static void listar() {
+        String sql = "SELECT * FROM produtos";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                String nome = rs.getString("nome");
+                double preco = rs.getDouble("preco");
+                int quantidade = rs.getInt("quantidade");
+
+                System.out.println("\nNome do produto: " + nome +
+                        "\nPreço: " + preco +
+                        "\nQuantidade: " + quantidade + "\n");
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 }
