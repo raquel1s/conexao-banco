@@ -28,7 +28,7 @@ public class UsuarioDAO {
 
     public static ArrayList<Usuario> listar() {
         ArrayList<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT nome, email FROM usuarios";
+        String sql = "SELECT id, nome, email FROM usuarios";
 
         try(Connection conn = Conexao.conectar();
         PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -36,10 +36,11 @@ public class UsuarioDAO {
             ResultSet rs = stmt.executeQuery(sql);
 
             while(rs.next()) {
+                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String email = rs.getString("email");
 
-                Usuario usuario = new Usuario(nome, email);
+                Usuario usuario = new Usuario(id, nome, email);
                 usuarios.add(usuario);
             }
 
@@ -48,6 +49,76 @@ public class UsuarioDAO {
         }
 
         return usuarios;
+    }
+
+    public static ArrayList<Usuario> listarDominio(String dominio) {
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT id, nome, email FROM usuarios WHERE email LIKE '%@"+dominio+"'";
+
+        try(Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+
+                Usuario usuario = new Usuario(id, nome, email);
+                usuarios.add(usuario);
+            }
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
+    }
+
+    public static Usuario listarPorId(int id) {
+        String sql = "SELECT id, nome, email FROM usuarios WHERE id = ?";
+        int newId = 0;
+        String nome = "";
+        String email = "";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                newId = rs.getInt("id");
+                nome = rs.getString("nome");
+                email = rs.getString("email");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Usuario(newId, nome, email);
+    }
+
+    public static int qntRegistros() {
+        int quantidade = 0;
+        String sql = "SELECT COUNT(*) from usuarios";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()) {
+                quantidade = rs.getInt(1);
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return quantidade;
     }
 
     public static void atualizar(String nome, String novoEmail) {
@@ -80,4 +151,5 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
     }
+
 }

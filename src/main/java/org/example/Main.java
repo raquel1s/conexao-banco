@@ -14,7 +14,6 @@ import org.example.usuario.Usuario;
 import org.example.usuario.UsuarioDAO;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -29,7 +28,8 @@ public class Main {
             System.out.println("2. ATUALIZAR");
             System.out.println("3. EXCLUIR");
             System.out.println("4. LISTAR");
-            System.out.println("5. SAIR");
+            System.out.println("5. BUSCAR");
+            System.out.println("6. SAIR");
             System.out.print("Escolha uma opção_ ");
             opcao = sc.nextInt();
 
@@ -38,11 +38,13 @@ public class Main {
                 case 2 -> atualizar();
                 case 3 -> excluir();
                 case 4 -> listar();
-                case 5 -> System.out.println("Saindo...");
+                case 5 -> buscar();
+                case 6 -> System.out.println("Saindo...");
                 default -> System.out.println("Opção Inválida.");
             }
-        }while(opcao != 5);
+        }while(opcao != 6);
     }
+
 
     private static void menuClasses(){
         System.out.println("1 - Usuário");
@@ -53,6 +55,42 @@ public class Main {
         System.out.println("6 - Funcionário");
         System.out.println("7 - Voltar");
         System.out.print("Escolha uma opção_ ");
+    }
+
+    private static void buscar() {
+        do{
+            System.out.println("=== BUSCAR ===");
+            System.out.println("1. Buscar por id");
+            System.out.println("2. Buscar por domínio de email");
+            System.out.println("3. Contar usuários cadastrados");
+            System.out.println("4. Voltar");
+            System.out.print("Escolha uma opção_");
+            opcao = sc.nextInt();
+
+            switch (opcao){
+                case 1 -> {
+                    System.out.println("Digite o id do usuário que deseja buscar: ");
+                    int id = sc.nextInt();
+
+                    System.out.println(UsuarioDAO.listarPorId(id));
+                }
+                case 2 -> {
+                    System.out.println("Digite o domínio de email que deseja buscar: ex: (email.com)");
+                    String dominio = sc.next();
+
+                    for(Usuario u : UsuarioDAO.listarDominio(dominio)){
+                        System.out.println(u);
+                    }
+                }
+                case 3 -> {
+                    System.out.println("Quantidade de usuários registrados: " + UsuarioDAO.qntRegistros() + "\n");
+                }
+                case 4 -> System.out.println("Voltando para o menu principal.");
+                default -> System.out.println("Opção Inválida.");
+            }
+        }while(opcao != 4);
+
+
     }
 
     private static void listar() {
